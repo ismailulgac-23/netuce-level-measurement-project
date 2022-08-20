@@ -1,13 +1,13 @@
-import React from "react";
-import { View, TouchableOpacity } from "react-native";
-import { Text, Icon, Image, StarRating, Tag } from "@components";
-import { useTheme } from "@config";
-import PropTypes from "prop-types";
-import styles from "./styles";
-import { useTranslation } from "react-i18next";
+import React from 'react';
+import {View, TouchableOpacity} from 'react-native';
+import {Text, Icon, Image, StarRating, Tag} from '@components';
+import {useTheme} from '@config';
+import PropTypes from 'prop-types';
+import styles from './styles';
+import {useTranslation} from 'react-i18next';
 export default function CarItem(props) {
-  const { t } = useTranslation();
-  const { colors } = useTheme();
+  const {t} = useTranslation();
+  const {colors} = useTheme();
   const {
     list,
     block,
@@ -29,7 +29,7 @@ export default function CarItem(props) {
   const renderBlock = () => {
     return (
       <View style={[styles.blockContain, style]}>
-        <View style={[styles.blockRow, { marginBottom: 3 }]}>
+        <View style={[styles.blockRow, {marginBottom: 3}]}>
           <Text title3 primaryColor semibold>
             {price}
           </Text>
@@ -37,12 +37,12 @@ export default function CarItem(props) {
             {title}
           </Text>
         </View>
-        <View style={[styles.blockRow, { marginBottom: 10 }]}>
+        <View style={[styles.blockRow, {marginBottom: 10}]}>
           <Text footnote>{t(per)}</Text>
           <Text body2>{name}</Text>
         </View>
         <TouchableOpacity onPress={onPress} activeOpacity={0.9}>
-          <Image source={image} style={styles.blockImage} />
+          <Image source={image} style={styles.blockImage} resizeMode="cover" />
         </TouchableOpacity>
       </View>
     );
@@ -55,35 +55,34 @@ export default function CarItem(props) {
     return (
       <View style={[styles.listContent, style]}>
         <TouchableOpacity onPress={onPress} activeOpacity={0.9}>
-          <Image source={image} style={styles.listImage} />
+          <Image source={image} style={styles.listImage} resizeMode="cover" />
         </TouchableOpacity>
         <View style={styles.listContentRight}>
           <Text headline semibold>
             {title}
           </Text>
-          <Text subhead grayColor style={{ marginVertical: 3 }}>
+          <Text subhead grayColor style={{marginVertical: 3}}>
             {name}
           </Text>
           <View style={styles.listContentService}>
             {services.map((item, index) => {
               return (
                 <Tag
-                  key={"service" + index}
+                  key={'service' + index}
                   icon={
                     <Icon
                       name={item.icon}
                       size={12}
                       color={colors.accent}
                       solid
-                      style={{ marginRight: 5 }}
+                      style={{marginRight: 5}}
                     />
                   }
                   chip
                   style={{
                     marginTop: 5,
                     marginRight: 5,
-                  }}
-                >
+                  }}>
                   {item.name}
                 </Tag>
               );
@@ -106,28 +105,28 @@ export default function CarItem(props) {
     return (
       <View style={[styles.girdContent, style]}>
         <TouchableOpacity onPress={onPress} activeOpacity={0.9}>
-          <Image source={image} style={styles.girdImage} />
+          <Image source={image} style={styles.girdImage} resizeMode="cover" />
         </TouchableOpacity>
-        <View style={{ alignItems: "flex-start" }}>
-          <Text headline semibold style={{ marginTop: 5 }}>
+        <View style={{alignItems: 'flex-start'}}>
+          <Text headline semibold style={{marginTop: 5}}>
             {title}
           </Text>
-          <Text subhead grayColor style={{ marginVertical: 5 }}>
+          <Text subhead grayColor style={{marginVertical: 5}}>
             {name}
           </Text>
           <View style={styles.girdContentRate}>
-            <View style={{ width: 60 }}>
+            <View style={{width: 60}}>
               <StarRating
                 disabled={true}
                 starSize={10}
                 maxStars={5}
                 rating={rate}
-                selectedStar={(rating) => {}}
+                selectedStar={rating => {}}
                 fullStarColor={colors.accent}
               />
             </View>
-            <Text caption2 grayColor style={{ marginHorizontal: 5 }}>
-              {numReviews} {t("reviews")}
+            <Text caption2 grayColor style={{marginHorizontal: 5}}>
+              {numReviews} {t('reviews')}
             </Text>
           </View>
           <Text
@@ -136,8 +135,7 @@ export default function CarItem(props) {
             semibold
             style={{
               marginTop: 5,
-            }}
-          >
+            }}>
             {price}
           </Text>
         </View>
@@ -171,11 +169,11 @@ CarItem.defaultProps = {
   list: true,
   block: false,
   grid: false,
-  image: "",
-  title: "",
-  name: "",
-  price: "",
-  per: "",
+  image: '',
+  title: '',
+  name: '',
+  price: '',
+  per: '',
   rate: 0,
   numReviews: 0,
   services: [],

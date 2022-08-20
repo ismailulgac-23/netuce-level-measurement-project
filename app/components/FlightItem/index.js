@@ -1,14 +1,14 @@
-import React from "react";
-import { View, TouchableOpacity, Image } from "react-native";
-import PropTypes from "prop-types";
-import { Text, Icon } from "@components";
-import { BaseColor, Images, useTheme } from "@config";
-import styles from "./styles";
-import { useTranslation } from "react-i18next";
+import React from 'react';
+import {View, TouchableOpacity, Image} from 'react-native';
+import PropTypes from 'prop-types';
+import {Text, Icon} from '@components';
+import {BaseColor, Images, useTheme} from '@config';
+import styles from './styles';
+import {useTranslation} from 'react-i18next';
 
 export default function FlightItem(props) {
-  const { t } = useTranslation();
-  const { colors } = useTheme();
+  const {t} = useTranslation();
+  const {colors} = useTheme();
   const {
     style,
     from,
@@ -23,22 +23,21 @@ export default function FlightItem(props) {
   } = props;
   return (
     <TouchableOpacity
-      style={[styles.content, { backgroundColor: colors.card }, style]}
-      onPress={onPress}
-    >
-      <View style={[styles.contentTop, { borderBottomColor: colors.border }]}>
-        <View style={{ flex: 1 }}>
+      style={[styles.content, {backgroundColor: colors.card}, style]}
+      onPress={onPress}>
+      <View style={[styles.contentTop, {borderBottomColor: colors.border}]}>
+        <View style={{flex: 1}}>
           <Text title2>{from.hour}</Text>
           <Text footnote light>
             {from.value}
           </Text>
         </View>
-        <View style={{ flex: 1.5, alignItems: "center" }}>
+        <View style={{flex: 1.5, alignItems: 'center'}}>
           <Text caption1 light>
             {totalHour} Hours
           </Text>
           <View style={styles.contentLine}>
-            <View style={[styles.line, { borderColor: colors.border }]} />
+            <View style={[styles.line, {borderColor: colors.border}]} />
             <Icon
               name="plane"
               color={BaseColor.dividerColor}
@@ -46,13 +45,13 @@ export default function FlightItem(props) {
               solid
               enableRTL={true}
             />
-            <View style={[styles.dot, { backgroundColor: colors.primary }]} />
+            <View style={[styles.dot, {backgroundColor: colors.primary}]} />
           </View>
           <Text caption1 light>
-            {t("non_stop")}
+            {t('non_stop')}
           </Text>
         </View>
-        <View style={{ flex: 1, alignItems: "flex-end" }}>
+        <View style={{flex: 1, alignItems: 'flex-end'}}>
           <Text title2>{to.hour}</Text>
           <Text footnote light>
             {to.value}
@@ -61,7 +60,7 @@ export default function FlightItem(props) {
       </View>
       <View style={styles.contentBottom}>
         <View style={styles.bottomLeft}>
-          <Image style={styles.image} source={image} />
+          <Image style={styles.image} resizeMode="cover" source={image} />
           <View>
             <Text caption1 semibold accentColor>
               {brand}
@@ -71,11 +70,11 @@ export default function FlightItem(props) {
             </Text>
           </View>
         </View>
-        <View style={{ flexDirection: "row", alignItems: "flex-end" }}>
+        <View style={{flexDirection: 'row', alignItems: 'flex-end'}}>
           <Text title3 semibold primaryColor>
             {price}
           </Text>
-          <Text caption1 light style={{ marginLeft: 5 }}>
+          <Text caption1 light style={{marginLeft: 5}}>
             Pax
           </Text>
         </View>
@@ -100,22 +99,22 @@ FlightItem.propTypes = {
 FlightItem.defaultProps = {
   style: {},
   from: {
-    name: "United State",
-    value: "USA",
+    name: 'United State',
+    value: 'USA',
     image: Images.airline1,
-    hour: "05:00",
+    hour: '05:00',
   },
   to: {
-    name: "Singapore",
-    value: "SIN",
+    name: 'Singapore',
+    value: 'SIN',
     image: Images.airline2,
-    hour: "18:00",
+    hour: '18:00',
   },
   totalHour: 13.5,
-  brand: "Vietjet",
+  brand: 'Vietjet',
   image: Images.airline2,
-  type: "Economy",
-  price: "$499,99",
-  route: "non_stop",
+  type: 'Economy',
+  price: '$499,99',
+  route: 'non_stop',
   onPress: () => {},
 };

@@ -1,53 +1,53 @@
-import React, { useState } from "react";
-import { View, TouchableOpacity } from "react-native";
-import PropTypes from "prop-types";
-import { Text, Button, Icon } from "@components";
-import styles from "./styles";
-import Modal from "react-native-modal";
-import { useTheme } from "@config";
-import { useTranslation } from "react-i18next";
+import React, {useState} from 'react';
+import {View, TouchableOpacity} from 'react-native';
+import PropTypes from 'prop-types';
+import {Text, Button, Icon} from '@components';
+import styles from './styles';
+import Modal from 'react-native-modal';
+import {useTheme} from '@config';
+import {useTranslation} from 'react-i18next';
 
 export default function FormOption(props) {
-  const { t } = useTranslation();
+  const {t} = useTranslation();
 
   const [modalVisible, setModalVisible] = useState(false);
   const [option, setOption] = useState(
-    props.option.map((item) => {
+    props.option.map(item => {
       return {
         ...item,
         checked: item.value === props.value,
       };
-    })
+    }),
   );
   const [value, setValue] = useState(props.value);
-  const { colors } = useTheme();
-  const { style, label, onCancel, onChange } = props;
+  const {colors} = useTheme();
+  const {style, label, onCancel, onChange} = props;
 
   const openModal = () => {
     setModalVisible(true);
     setOption(
-      option.map((item) => {
+      option.map(item => {
         return {
           ...item,
           checked: item.value === value,
         };
-      })
+      }),
     );
   };
 
-  const onSelect = (select) => {
+  const onSelect = select => {
     setOption(
-      option.map((item) => {
+      option.map(item => {
         return {
           ...item,
           checked: item.value === select.value,
         };
-      })
+      }),
     );
   };
 
   const onApply = () => {
-    const selected = option.filter((item) => item.checked);
+    const selected = option.filter(item => item.checked);
     if (selected.length > 0) {
       setValue(selected[0].value);
       setModalVisible(false);
@@ -64,12 +64,10 @@ export default function FormOption(props) {
           setOption(props.option);
           onCancel();
         }}
-        swipeDirection={["down"]}
-        style={styles.bottomModal}
-      >
+        swipeDirection={['down']}
+        style={styles.bottomModal}>
         <View
-          style={[styles.contentFilterBottom, { backgroundColor: colors.card }]}
-        >
+          style={[styles.contentFilterBottom, {backgroundColor: colors.card}]}>
           <View style={styles.contentSwipeDown}>
             <View style={styles.lineSwipeDown} />
           </View>
@@ -77,11 +75,10 @@ export default function FormOption(props) {
             <TouchableOpacity
               style={[
                 styles.contentActionModalBottom,
-                { borderBottomColor: colors.border },
+                {borderBottomColor: colors.border},
               ]}
               key={item.value}
-              onPress={() => onSelect(item)}
-            >
+              onPress={() => onSelect(item)}>
               <Text body2 semibold primaryColor={item.checked}>
                 {item.text}
               </Text>
@@ -92,18 +89,16 @@ export default function FormOption(props) {
           ))}
           <Button
             full
-            style={{ marginTop: 10, marginBottom: 20 }}
-            onPress={() => onApply()}
-          >
-            {t("apply")}
+            style={{marginTop: 10, marginBottom: 20}}
+            onPress={() => onApply()}>
+            {t('apply')}
           </Button>
         </View>
       </Modal>
       <TouchableOpacity
-        style={[styles.contentForm, { backgroundColor: colors.card }, style]}
-        onPress={() => openModal()}
-      >
-        <Text caption2 light style={{ marginBottom: 5 }}>
+        style={[styles.contentForm, {backgroundColor: colors.card}, style]}
+        onPress={() => openModal()}>
+        <Text caption2 light style={{marginBottom: 5}}>
           {label}
         </Text>
         <Text body1 semibold>
@@ -125,24 +120,24 @@ FormOption.propTypes = {
 
 FormOption.defaultProps = {
   style: {},
-  label: "Seat Class",
-  value: "Economy",
+  label: 'Seat Class',
+  value: 'Economy',
   option: [
     {
-      value: "Economy",
-      text: "Economy Class",
+      value: 'Economy',
+      text: 'Economy Class',
     },
     {
-      value: "Business",
-      text: "Business Class",
+      value: 'Business',
+      text: 'Business Class',
     },
     {
-      value: "First",
-      text: "First Class",
+      value: 'First',
+      text: 'First Class',
     },
     {
-      value: "Normal",
-      text: "Normal Class",
+      value: 'Normal',
+      text: 'Normal Class',
     },
   ],
   onCancel: () => {},

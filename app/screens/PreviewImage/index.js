@@ -69,7 +69,9 @@ export default function PreviewImage({navigation}) {
       <Header
         title=""
         renderLeft={() => {
-          return <Icon name="arrow-left" size={20} color={BaseColor.whiteColor} />;
+          return (
+            <Icon name="arrow-left" size={20} color={BaseColor.whiteColor} />
+          );
         }}
         onPressLeft={() => {
           navigation.goBack();

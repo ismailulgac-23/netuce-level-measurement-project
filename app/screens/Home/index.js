@@ -1,10 +1,5 @@
 import React, {useState} from 'react';
-import {
-  View,
-  Animated,
-  TouchableOpacity,
-  FlatList,
-} from 'react-native';
+import {View, Animated, TouchableOpacity, FlatList} from 'react-native';
 import {
   Image,
   Text,

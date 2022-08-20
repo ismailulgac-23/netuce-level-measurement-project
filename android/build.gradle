@@ -1,0 +1,33 @@
+
+buildscript {
+    ext {
+        buildToolsVersion = "30.0.2"
+        minSdkVersion = 21
+        compileSdkVersion = 30
+        targetSdkVersion = 30
+        supportLibVersion = "28.0.3"
+        googlePlayServicesVersion = "16.1.0"
+        androidMapsUtilsVersion = "0.5+"
+        ndkVersion = "20.1.5948944"
+    }
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:4.2.1'
+        classpath 'com.android.support:multidex:1.0.3'
+    }
+}
+
+allprojects {
+    repositories {
+        mavenCentral()
+        mavenLocal()
+        maven {
+            url "$rootDir/../node_modules/react-native/android"
+        }
+        google()
+        maven { url 'https://www.jitpack.io' }
+    }
+}

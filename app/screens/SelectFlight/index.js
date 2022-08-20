@@ -1,36 +1,29 @@
-import React, { useState } from "react";
+import React, {useState} from 'react';
 import {
   View,
   FlatList,
   ActivityIndicator,
   TouchableOpacity,
-} from "react-native";
-import { BaseStyle, useTheme } from "@config";
-import {
-  Header,
-  SafeAreaView,
-  Icon,
-  TextInput,
-  Text,
-  Image,
-} from "@components";
-import styles from "./styles";
-import { FlightBrandData } from "@data";
-import { useTranslation } from "react-i18next";
+} from 'react-native';
+import {BaseStyle, useTheme} from '@config';
+import {Header, SafeAreaView, Icon, TextInput, Text, Image} from '@components';
+import styles from './styles';
+import {FlightBrandData} from '@data';
+import {useTranslation} from 'react-i18next';
 
-export default function SelectFlight({ navigation, route }) {
-  const { colors } = useTheme();
-  const { t } = useTranslation();
+export default function SelectFlight({navigation, route}) {
+  const {colors} = useTheme();
+  const {t} = useTranslation();
 
-  const [airplane, setAirplane] = useState("");
+  const [airplane, setAirplane] = useState('');
   const [flight, setFlight] = useState(
-    FlightBrandData.map((item) => {
-      const { selected } = route.params;
+    FlightBrandData.map(item => {
+      const {selected} = route.params;
       return {
         ...item,
         checked: item.value === selected?.value,
       };
-    })
+    }),
   );
   const [loading, setLoading] = useState(false);
 
@@ -40,9 +33,9 @@ export default function SelectFlight({ navigation, route }) {
    * @date 2019-08-03
    * @param {object} select
    */
-  const onChange = (select) => {
+  const onChange = select => {
     setFlight(
-      flight.map((item) => {
+      flight.map(item => {
         if (item.value == select.value) {
           return {
             ...item,
@@ -54,7 +47,7 @@ export default function SelectFlight({ navigation, route }) {
             checked: false,
           };
         }
-      })
+      }),
     );
   };
 
@@ -62,8 +55,8 @@ export default function SelectFlight({ navigation, route }) {
    * call when on save
    */
   const onSave = () => {
-    const { onChangeAir } = route.params;
-    const selected = flight.filter((item) => item.checked);
+    const {onChangeAir} = route.params;
+    const selected = flight.filter(item => item.checked);
     if (selected.length > 0 && onChangeAir) {
       setLoading(true);
       setTimeout(() => {
@@ -74,9 +67,9 @@ export default function SelectFlight({ navigation, route }) {
   };
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{flex: 1}}>
       <Header
-        title={t("airplane")}
+        title={t('airplane')}
         renderLeft={() => {
           return (
             <Icon
@@ -93,7 +86,7 @@ export default function SelectFlight({ navigation, route }) {
           } else {
             return (
               <Text headline primaryColor numberOfLines={1}>
-                {t("save")}
+                {t('save')}
               </Text>
             );
           }
@@ -105,29 +98,26 @@ export default function SelectFlight({ navigation, route }) {
       />
       <SafeAreaView
         style={BaseStyle.safeAreaView}
-        edges={["right", "left", "bottom"]}
-      >
+        edges={['right', 'left', 'bottom']}>
         <View style={styles.contain}>
           <TextInput
-            onChangeText={(text) => setAirplane(text)}
-            placeholder={t("search_airplane")}
+            onChangeText={text => setAirplane(text)}
+            placeholder={t('search_airplane')}
             value={airplane}
           />
           <FlatList
-            contentContainerStyle={{ paddingTop: 5 }}
+            contentContainerStyle={{paddingTop: 5}}
             data={flight}
             keyExtractor={(item, index) => item.id}
-            renderItem={({ item }) => (
+            renderItem={({item}) => (
               <TouchableOpacity
-                style={[styles.item, { borderBottomColor: colors.border }]}
-                onPress={() => onChange(item)}
-              >
+                style={[styles.item, {borderBottomColor: colors.border}]}
+                onPress={() => onChange(item)}>
                 <View
                   style={{
-                    flexDirection: "row",
-                    alignItems: "center",
-                  }}
-                >
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                  }}>
                   <Image
                     style={styles.imageBrand}
                     source={item.image}

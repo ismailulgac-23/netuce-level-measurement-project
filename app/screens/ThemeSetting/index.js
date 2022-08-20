@@ -1,26 +1,26 @@
-import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { View, TouchableOpacity, FlatList, StatusBar } from "react-native";
-import { ThemeSupport } from "@config";
-import { BaseStyle, useTheme } from "@config";
-import { Header, SafeAreaView, Icon, Text, Button } from "@components";
-import { ApplicationActions } from "@actions";
-import styles from "./styles";
-import { useTranslation } from "react-i18next";
+import React, {useState} from 'react';
+import {useSelector, useDispatch} from 'react-redux';
+import {View, TouchableOpacity, FlatList, StatusBar} from 'react-native';
+import {ThemeSupport} from '@config';
+import {BaseStyle, useTheme} from '@config';
+import {Header, SafeAreaView, Icon, Text, Button} from '@components';
+import {ApplicationActions} from '@actions';
+import styles from './styles';
+import {useTranslation} from 'react-i18next';
 
-export default function ThemeSetting({ navigation }) {
-  const themeStorage = useSelector((state) => state.application.theme);
-  const { colors } = useTheme();
+export default function ThemeSetting({navigation}) {
+  const themeStorage = useSelector(state => state.application.theme);
+  const {colors} = useTheme();
   const dispatch = useDispatch();
-  const { t } = useTranslation();
+  const {t} = useTranslation();
 
   const [themeSupport, setTheme] = useState(
-    ThemeSupport.map((item) => {
+    ThemeSupport.map(item => {
       return {
         ...item,
         selected: item.theme === themeStorage,
       };
-    })
+    }),
   );
 
   /**
@@ -28,14 +28,14 @@ export default function ThemeSetting({ navigation }) {
    *
    * @param {*} selected
    */
-  const onSelect = (selected) => {
+  const onSelect = selected => {
     setTheme(
-      themeSupport.map((item) => {
+      themeSupport.map(item => {
         return {
           ...item,
           selected: item.theme === selected.theme,
         };
-      })
+      }),
     );
   };
 
@@ -44,7 +44,7 @@ export default function ThemeSetting({ navigation }) {
    *
    */
   const onChangeTheme = () => {
-    const list = themeSupport.filter((item) => item.selected);
+    const list = themeSupport.filter(item => item.selected);
     if (list.length > 0) {
       dispatch(ApplicationActions.onChangeTheme(list[0].theme));
       StatusBar.setBackgroundColor(list[0].light.colors.primary, true);
@@ -57,24 +57,22 @@ export default function ThemeSetting({ navigation }) {
    * @param {*} item
    * @returns
    */
-  const renderItem = (item) => {
+  const renderItem = item => {
     return (
       <TouchableOpacity
         style={[
           styles.profileItem,
-          { borderBottomColor: colors.border, borderBottomWidth: 1 },
+          {borderBottomColor: colors.border, borderBottomWidth: 1},
         ]}
-        onPress={() => onSelect(item)}
-      >
-        <View style={{ flexDirection: "row", alignItems: "center" }}>
+        onPress={() => onSelect(item)}>
+        <View style={{flexDirection: 'row', alignItems: 'center'}}>
           <View
             style={{
               width: 16,
               height: 16,
               backgroundColor: item.light.colors.primary,
-            }}
-          ></View>
-          <Text body1 style={{ marginHorizontal: 8 }}>
+            }}></View>
+          <Text body1 style={{marginHorizontal: 8}}>
             {item.theme}
           </Text>
         </View>
@@ -86,9 +84,9 @@ export default function ThemeSetting({ navigation }) {
   };
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{flex: 1}}>
       <Header
-        title={t("theme")}
+        title={t('theme')}
         renderLeft={() => {
           return (
             <Icon
@@ -105,17 +103,16 @@ export default function ThemeSetting({ navigation }) {
       />
       <SafeAreaView
         style={BaseStyle.safeAreaView}
-        edges={["right", "left", "bottom"]}
-      >
+        edges={['right', 'left', 'bottom']}>
         <FlatList
           contentContainerStyle={styles.contain}
           data={themeSupport}
           keyExtractor={(item, index) => item.theme}
-          renderItem={({ item }) => renderItem(item)}
+          renderItem={({item}) => renderItem(item)}
         />
-        <View style={{ paddingHorizontal: 20, paddingVertical: 15 }}>
+        <View style={{paddingHorizontal: 20, paddingVertical: 15}}>
           <Button full onPress={onChangeTheme}>
-            {t("apply")}
+            {t('apply')}
           </Button>
         </View>
       </SafeAreaView>
